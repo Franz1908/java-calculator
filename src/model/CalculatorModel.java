@@ -11,7 +11,7 @@ public class CalculatorModel {
     private String operation;
     private Double result;
     //private boolean isNegative = false;
-    private boolean isPendingOPeration = false;
+    //private boolean isPendingOPeration = false;
 
     /**
      * Default constructor
@@ -82,13 +82,13 @@ public class CalculatorModel {
         this.isNegative = isNegative;
     } */
 
-    public boolean isPendingOPeration() {
+   /* public boolean isPendingOPeration() {
         return this.isPendingOPeration;
     }
 
     public void setIsPendingOPeration(boolean isPendingOPeration) {
         this.isPendingOPeration = isPendingOPeration;
-    }
+    } */
 
     /**
      * Performs binary operations (addition, subtraction, multiplication, division)
