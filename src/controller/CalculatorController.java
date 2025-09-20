@@ -49,7 +49,7 @@ public class CalculatorController {
                 calculatorWindow.getDisplay().getText().equals("-0")) {
             calculatorWindow.getDisplay().setText(button.getText());
             calculatorModel.setIsNegative(false);
-        } else {
+        } else if(calculatorWindow.getDisplay().getText().length() < 15){
             calculatorWindow.getDisplay().appendText(button.getText());
         }
     }
@@ -76,12 +76,11 @@ public class CalculatorController {
                     try {
                         calculatorModel.setSecondNUmber(Double.parseDouble(calculatorWindow.getDisplay().getText()));
                         Double result = calculatorModel.operations();
-
                         // Display integer if result has no decimal part
                         if (result % 1 == 0) {
                             calculatorWindow.getDisplay().setText(Integer.toString(result.intValue()));
                         } else {
-                            calculatorWindow.getDisplay().setText(Double.toString(result));
+                            calculatorWindow.getDisplay().setText(String.format("%.10f", result));
                         }
                     } catch (NumberFormatException nfe) {
                         calculatorWindow.getDisplay().setText("");
@@ -91,7 +90,7 @@ public class CalculatorController {
 
             case ".":
                 // Add decimal point only if not already present
-                if (!calculatorWindow.getDisplay().getText().contains(".")) {
+                if (!calculatorWindow.getDisplay().getText().contains(".") && calculatorWindow.getDisplay().getText().length() < 15) {
                     calculatorWindow.getDisplay().setText(calculatorWindow.getDisplay().getText() + ".");
                 }
                 break;
