@@ -123,7 +123,7 @@ public class CalculatorController {
                 try {
                     Double result = calculatorModel.unaryOperations("%",
                             Double.parseDouble(calculatorWindow.getDisplay().getText()));
-                    calculatorWindow.getDisplay().setText(Double.toString(result));
+                    calculatorWindow.getDisplay().setText(String.format("%.10f", result));
                 } catch (NumberFormatException nfe) {
                     calculatorWindow.getDisplay().setText("");
                 }
@@ -136,7 +136,7 @@ public class CalculatorController {
                     if (result == null) {
                         calculatorWindow.getDisplay().setText("Invalid operation");
                     } else {
-                        calculatorWindow.getDisplay().setText(Double.toString(result));
+                        calculatorWindow.getDisplay().setText(String.format("%.10f", result));
                     }
                 } catch (NumberFormatException nfe) {
                     calculatorWindow.getDisplay().setText("");
