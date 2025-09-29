@@ -19,9 +19,14 @@ public class Constants {
     public static final Color ORANGE = new Color(255, 149, 0);
     public static final Color EERIE_BLACK = new Color(28, 28, 28);
 
+    //Calculator function buttons
     public static final String[] FUNCTIONS = {"AC", "%", "√"};
+    //Calculator digit buttons including decimal point and sign toggle
     public static final String[] DIGITS_BUTTON = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "+/-"};
+    //Calculator operator buttons
     public static final String[] OPERATORS_BUTTON = {"+", "-", "x", "/", "="};
+    //Keypad panel digits
     public static final String[] DIGITS_KEYPAD_PANEL = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
+    //Keypad panel operators
     public static final String[]  OPERATORS_KEYPAD_PANEL = {"/", "x", "-", "+", "=", ".", "+/-"};
 }
