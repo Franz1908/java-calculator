@@ -89,13 +89,6 @@ This project implements the **MVC (Model-View-Controller)** pattern:
 ## To-Do / Future Improvements
 
 - [ ] **Operation Chaining**: Allow multiple operations without pressing equals (e.g., 2 + 3 + 4 should work continuously)
-- [ ] Keyboard input support
-- [ ] Memory functions (M+, M-, MR, MC)
-- [ ] History of calculations
-- [ ] Scientific calculator mode
-- [ ] Parentheses support for complex expressions
-- [ ] Backspace/delete functionality
-- [ ] Responsive window resizing
 
 ## Known Limitations
 
@@ -103,10 +96,3 @@ This project implements the **MVC (Model-View-Controller)** pattern:
 - Maximum display length is 15 characters
 - Square root only works with non-negative numbers
 
-## License
-
-This project is available for educational purposes.
-
-## Author
-
-Created as a learning project to demonstrate Java Swing and MVC architecture.
