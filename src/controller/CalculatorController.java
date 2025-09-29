@@ -48,7 +48,6 @@ public class CalculatorController {
         if (calculatorWindow.getDisplay().getText().equals("0") ||
                 calculatorWindow.getDisplay().getText().equals("-0")) {
             calculatorWindow.getDisplay().setText(button.getText());
-            //calculatorModel.setIsNegative(false);
         } else if(calculatorWindow.getDisplay().getText().length() < 15){
             calculatorWindow.getDisplay().appendText(button.getText());
         }
@@ -96,22 +95,19 @@ public class CalculatorController {
                 break;
 
             case "+/-":
-                // Toggle sign of current number
-                /*if (Double.parseDouble(calculatorWindow.getDisplay().getText()) > 0) {
-                    calculatorModel.setIsNegative(true);
-                    calculatorWindow.getDisplay().setText("-" + calculatorWindow.getDisplay().getText());
-                } else {
-                    calculatorModel.setIsNegative(false);
-                    calculatorWindow.getDisplay().setText(calculatorWindow.getDisplay().getText().replace("-", ""));
-                }*/
-                double value =  Double.parseDouble(calculatorWindow.getDisplay().getText().replace(",", "."));
-                value = value * (-1);
-                if(value % 1 == 0) {
-                    calculatorWindow.getDisplay().setText(Double.toString((int) value));
+                try{
+                    double value =  Double.parseDouble(calculatorWindow.getDisplay().getText().replace(",", "."));
+                    value = value * (-1);
+                    if(value % 1 == 0) {
+                        calculatorWindow.getDisplay().setText(Integer.toString((int) value));
+                    }
+                    else{
+                        calculatorWindow.getDisplay().setText(Double.toString(value));
+                    }
+                } catch (NumberFormatException nfe) {
+                    calculatorWindow.getDisplay().setText("");
                 }
-                else{
-                    calculatorWindow.getDisplay().setText(Double.toString(value));
-                }
+
         }
     }
 

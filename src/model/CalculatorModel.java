@@ -10,8 +10,6 @@ public class CalculatorModel {
     private Double secondNumber;
     private String operation;
     private Double result;
-    //private boolean isNegative = false;
-    //private boolean isPendingOPeration = false;
 
     /**
      * Default constructor
@@ -75,22 +73,6 @@ public class CalculatorModel {
     }
 
     /**
-     * Sets the negative flag
-     * @param isNegative Boolean indicating if number is negative
-
-    public void setIsNegative(boolean isNegative) {
-        this.isNegative = isNegative;
-    } */
-
-   /* public boolean isPendingOPeration() {
-        return this.isPendingOPeration;
-    }
-
-    public void setIsPendingOPeration(boolean isPendingOPeration) {
-        this.isPendingOPeration = isPendingOPeration;
-    } */
-
-    /**
      * Performs binary operations (addition, subtraction, multiplication, division)
      * @return The result of the operation
      */
@@ -140,6 +122,5 @@ public class CalculatorModel {
         this.secondNumber = null;
         this.result = null;
         this.operation = null;
-        //this.isNegative = false;
     }
 }

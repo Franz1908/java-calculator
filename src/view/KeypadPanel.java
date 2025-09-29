@@ -1,5 +1,7 @@
 package view;
 
+import constants.Constants;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -7,12 +9,6 @@ import java.awt.*;
  * Panel containing all calculator buttons arranged in a grid layout
  */
 public class KeypadPanel extends JPanel {
-
-    // Button categories
-    private static final String[] DIGITS = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
-    private static final String[] FUNCTIONS = {"AC", "√", "%"};
-    private static final String[] OPERATORS = {"/", "x", "-", "+", "=", ".", "+/-"};
-
     // Button arrays
     private MyButton[] digitButtons;
     private MyButton[] functionButtons;
@@ -23,12 +19,12 @@ public class KeypadPanel extends JPanel {
      */
     public KeypadPanel() {
         setLayout(new GridLayout(5, 4));
-        setBackground(new Color(28, 28, 28));
+        setBackground(Constants.EERIE_BLACK);
 
         // Initialize button arrays
-        digitButtons = new MyButton[DIGITS.length];      // 10 digits
-        functionButtons = new MyButton[FUNCTIONS.length]; // 3 functions
-        operatorButtons = new MyButton[OPERATORS.length]; // 7 operators
+        digitButtons = new MyButton[Constants.DIGITS_KEYPAD_PANEL.length];      // 10 digits
+        functionButtons = new MyButton[Constants.FUNCTIONS.length]; // 3 functions
+        operatorButtons = new MyButton[Constants.OPERATORS_KEYPAD_PANEL.length]; // 7 operators
 
         // First row: AC, √, %, /
         add(functionButtons[0] = new MyButton("AC"));

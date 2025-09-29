@@ -1,5 +1,7 @@
 package view;
 
+import constants.Constants;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -32,7 +34,7 @@ public class CalculatorWindow extends JFrame {
         add(keypadPanel, BorderLayout.CENTER);
 
         // Set window properties
-        setSize(WIDTH, HEIGHT);
+        setSize(Constants.WINDOW_WIDTH, Constants.WINDOW_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setLocationRelativeTo(null);

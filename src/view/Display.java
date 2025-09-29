@@ -1,5 +1,7 @@
 package view;
 
+import constants.Constants;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -15,13 +17,13 @@ public class Display extends JPanel {
      */
     public Display() {
         setLayout(new BorderLayout());
-        setBackground(new Color(28, 28, 28));
-        setPreferredSize(new Dimension(100, 75));
+        setBackground(Constants.EERIE_BLACK);
+        setPreferredSize(new Dimension(Constants.DISPLAY_WIDTH, Constants.DISPLAY_HEIGHT));
 
         // Initialize and style the display label
         label = new JLabel("0");
         label.setFont(new Font("Arial", Font.BOLD, 40));
-        label.setForeground(new Color(249, 249, 249));
+        label.setForeground(Constants.WHITE);
         label.setOpaque(false);
         label.setVerticalAlignment(JLabel.BOTTOM);
 
