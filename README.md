@@ -12,7 +12,7 @@ A simple yet functional calculator application built with Java Swing following t
 - **Decimal Support**: Handle decimal numbers with precision
 - **Clear Function**: AC (All Clear) button to reset the calculator
 - **Error Handling**: Validation for invalid operations (e.g., square root of negative numbers)
-- **Clean UI**: Dark themed interface inspired by modern calculator designs
+- **Clean UI**: Dark themed interface inspired by ios calculator 
 
 ## Project Structure
 
