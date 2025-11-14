@@ -1,96 +1,162 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * Model class that handles calculator data and operations
+ * Model class that handles calculator data and operations with support for chained operations
  */
 public class CalculatorModel {
 
-    // Calculator state variables
-    private Double firstNumber;
-    private Double secondNumber;
-    private String operation;
-    private Double result;
+    // Calculator state variables using lists for chained operations
+    private List<Double> numbers;
+    private List<String> operations;
+    private Double currentResult;
 
     /**
      * Default constructor
      */
-    public CalculatorModel() {}
-
-    /**
-     * Sets the first number for calculations
-     * @param firstNumber The first operand
-     */
-    public void setFirstNumber(Double firstNumber) {
-        this.firstNumber = firstNumber;
+    public CalculatorModel() {
+        this.numbers = new ArrayList<>();
+        this.operations = new ArrayList<>();
+        this.currentResult = null;
     }
 
     /**
-     * Sets the second number for calculations
-     * @param secondNumber The second operand
+     * Adds a number to the numbers list
+     * @param number The number to add
      */
-    public void setSecondNUmber(Double secondNumber) {
-        this.secondNumber = secondNumber;
+    public void addNumber(Double number) {
+        this.numbers.add(number);
     }
 
     /**
-     * Sets the operation to be performed
+     * Adds an operation to the operations list
      * @param operation The operation string (+, -, x, /)
      */
-    public void setOperation(String operation) {
-        this.operation = operation;
+    public void addOperation(String operation) {
+        this.operations.add(operation);
     }
 
     /**
-     * Gets the first number
-     * @return The first operand
+     * Gets the current result
+     * @return The current result
      */
-    public Double getFirstNUmber() {
-        return this.firstNumber;
+    public Double getCurrentResult() {
+        return this.currentResult;
     }
 
     /**
-     * Gets the second number
-     * @return The second operand
+     * Sets the current result
+     * @param result The result to set
      */
-    public Double getSecondNumber() {
-        return this.secondNumber;
+    public void setCurrentResult(Double result) {
+        this.currentResult = result;
     }
 
     /**
-     * Gets the current operation
-     * @return The operation string
+     * Checks if there are pending operations
+     * @return True if there are operations waiting to be executed
      */
-    public String getOperation() {
-        return this.operation;
+    public boolean hasPendingOperations() {
+        return !this.operations.isEmpty();
     }
 
     /**
-     * Checks if the current number is negative
-     * @return True if negative, false otherwise
-
-    public boolean isNegative() {
-        return this.isNegative;
-    }
-
-    /**
-     * Performs binary operations (addition, subtraction, multiplication, division)
-     * @return The result of the operation
+     * Gets the number of stored numbers
+     * @return The count of numbers in the list
      */
-    public Double operations() {
-        switch (this.operation) {
+    public int getNumbersCount() {
+        return this.numbers.size();
+    }
+
+    /**
+     * Calculates partial result after adding a new number
+     * This method calculates the result of the last pending operation
+     * @return The partial result
+     */
+    public Double calculatePartialResult() {
+        if (numbers.isEmpty()) {
+            return null;
+        }
+
+        // If this is the first number, just return it
+        if (numbers.size() == 1) {
+            currentResult = numbers.get(0);
+            return currentResult;
+        }
+
+        // Calculate based on the last operation
+        if (operations.isEmpty()) {
+            return currentResult;
+        }
+
+        String lastOperation = operations.get(operations.size() - 1);
+        Double leftOperand = (currentResult != null) ? currentResult : numbers.get(numbers.size() - 2);
+        Double rightOperand = numbers.get(numbers.size() - 1);
+
+        switch (lastOperation) {
             case "+":
-                result = this.firstNumber + this.secondNumber;
+                currentResult = leftOperand + rightOperand;
                 break;
             case "-":
-                result = this.firstNumber - this.secondNumber;
+                currentResult = leftOperand - rightOperand;
                 break;
             case "x":
-                result = this.firstNumber * this.secondNumber;
+                currentResult = leftOperand * rightOperand;
                 break;
             case "/":
-                result = this.firstNumber / this.secondNumber;
+                if (rightOperand == 0) {
+                    return null; // Division by zero
+                }
+                currentResult = leftOperand / rightOperand;
                 break;
         }
+
+        return currentResult;
+    }
+
+    /**
+     * Calculates the final result when equals is pressed
+     * @return The final result
+     */
+    public Double calculateFinalResult() {
+        if (numbers.isEmpty()) {
+            return null;
+        }
+
+        if (numbers.size() == 1) {
+            return numbers.get(0);
+        }
+
+        // Start with the first number
+        Double result = numbers.get(0);
+
+        // Apply each operation sequentially
+        for (int i = 0; i < operations.size() && i + 1 < numbers.size(); i++) {
+            String operation = operations.get(i);
+            Double nextNumber = numbers.get(i + 1);
+
+            switch (operation) {
+                case "+":
+                    result = result + nextNumber;
+                    break;
+                case "-":
+                    result = result - nextNumber;
+                    break;
+                case "x":
+                    result = result * nextNumber;
+                    break;
+                case "/":
+                    if (nextNumber == 0) {
+                        return null; // Division by zero
+                    }
+                    result = result / nextNumber;
+                    break;
+            }
+        }
+
+        currentResult = result;
         return result;
     }
 
@@ -107,9 +173,8 @@ public class CalculatorModel {
             case "√":
                 if (value < 0) {
                     return null; // Cannot calculate square root of negative number
-                } else {
-                    return Math.sqrt(value);
                 }
+                return Math.sqrt(value);
         }
         return null;
     }
@@ -118,9 +183,20 @@ public class CalculatorModel {
      * Resets all calculator state to initial values
      */
     public void reset() {
-        this.firstNumber = null;
-        this.secondNumber = null;
-        this.result = null;
-        this.operation = null;
+        this.numbers.clear();
+        this.operations.clear();
+        this.currentResult = null;
+    }
+
+    /**
+     * Prepares for a new calculation after equals was pressed
+     * Keeps the current result as the starting point
+     */
+    public void startNewCalculation() {
+        if (currentResult != null) {
+            numbers.clear();
+            operations.clear();
+            numbers.add(currentResult);
+        }
     }
 }
